@@ -59,9 +59,25 @@ with requests.Session() as s:
         #table = soup.find('table', attrs={'class':' span6'})
         #print(table)
     else:
-        print("Grades could not be loaded because format has not been initiated. Please contact the administrator of this program")
+        raise KeyError("Grades could not be loaded because format has not been initiated. Please contact the administrator of this program")
 
+from tkinter import *
+window=Tk()
+window.title('Timetable')
+window.geometry("250x350")
 classccount = 1
+lbl=Label(window, text=f"{today}", fg='black', font=("Helvetica", 16))
+lbl.place(x=5, y=5)
+cury = 30
 for classc in classes:
-    print(f"Period {classccount}: {classc['class']} in room {classc['room']}")
+    lbl=Label(window, text=f"Period {classccount}: {classc['class']} in room {classc['room']}", fg='red', font=("Helvetica", 16))
+    lbl.place(x=5, y=cury)
+    cury+=30
     classccount += 1
+    
+def exitProgram():
+   exit()
+
+btn = Button(window, text="Exit", command=exitProgram)
+btn.place(x=5, y=270)
+window.mainloop()
