@@ -51,13 +51,10 @@ with requests.Session() as s:
             tr1barray = []
             for tr1b in tr1a:
                 tr1barray.append(tr1b.text)
-            #try:
-            #    print(f"{tr1barray[0]}:\nYellis predicted: {tr1barray[1]}\nActual Grade: {tr1barray[3]}\n")
-            #except IndexError:
-            #    print(f"{tr1barray[0]}:\nYellis predicted: {tr1barray[1]}\nActual Grade: Missing\n")
-            
-        #table = soup.find('table', attrs={'class':' span6'})
-        #print(table)
+            try:
+                print(f"{tr1barray[0]}:\nYellis predicted: {tr1barray[1]}\nActual Grade: {tr1barray[3]}\n")
+            except IndexError:
+                print(f"{tr1barray[0]}:\nYellis predicted: {tr1barray[1]}\nActual Grade: Missing\n")
     else:
         raise KeyError("Grades could not be loaded because format has not been initiated. Please contact the administrator of this program")
 
