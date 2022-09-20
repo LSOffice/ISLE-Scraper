@@ -16,17 +16,19 @@ else:
 import requests, sys
 from bs4 import BeautifulSoup
 
-url = 'https://isle.island.edu.hk/login/index.php'
+args = sys.argv
+
+domain = sys.argv[1]
+
+url = f'https://{domain}/login/index.php'
 values = {'username': open("login.txt", "r").readlines()[0].replace("\n", ""),
           'password': open("login.txt", "r").readlines()[1].replace("\n", "")}
-args = sys.argv
-#args.pop(0)
 
 classes = []
 with requests.Session() as s:
     r = s.post(url, data=values)
     #print(r.text)
-    index_page = s.get("https://isle.island.edu.hk/")
+    index_page = s.get(f"https://{domain}/")
     soup = BeautifulSoup(index_page.text, 'html.parser')
     mydivs = soup.find_all("div", {"class": "greeting"})
     try:
@@ -46,7 +48,7 @@ with requests.Session() as s:
         })
     
     
-    index_page = s.get("https://isle.island.edu.hk/local/mis/reports/unitview.php")
+    index_page = s.get(f"https://{domain}/local/mis/reports/unitview.php")
     soup = BeautifulSoup(index_page.text, 'html.parser')
     spans = soup.find_all("span", {"class": "title"})
     yeargroup = ""
